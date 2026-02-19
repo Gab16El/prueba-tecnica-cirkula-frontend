@@ -28,13 +28,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.6)',
     },
     headerImg: {
-        width: '100%',  
+        width: '100%',
         height: '100%',
         resizeMode: 'cover',
     },
     headerLabelsContainer: {
         position: 'absolute',
-        top: 220,
+        bottom: 50,
         left: 20,
     },
     title: {

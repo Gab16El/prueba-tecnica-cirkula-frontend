@@ -1,17 +1,19 @@
 import React from 'react'
-import { View, Dimensions, ScrollView, StyleSheet } from 'react-native'
+import { View, ScrollView, StyleSheet } from 'react-native'
 import { colors } from '../theme/colors';
 import { Header } from '../components/home/Header';
-
-
-const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
+import { Categories } from '../components/home/Categories';
 
 export const HomeScreen = () => {
   return (
     <View style={styles.container}>
-      <ScrollView style={[styles.wrap, { width }]}>
-        <Header />
+      <Header />
+      <ScrollView
+        style={styles.curvedContainer}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContent}
+      >
+        <Categories />
       </ScrollView>
     </View>
   )
@@ -20,10 +22,18 @@ export const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: colors.black,
   },
-  wrap: {
-    width: width,
-    height: height * 0.25
+  curvedContainer: {
+    flex: 1,
+    backgroundColor: colors.white,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    marginTop: -30,
+  },
+  scrollContent: {
+    paddingTop: 20,
+    paddingHorizontal: 20,
+    paddingBottom: 40,
   },
 })
