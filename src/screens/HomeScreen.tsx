@@ -4,6 +4,7 @@ import { colors } from '../theme/colors';
 import { Header } from '../components/home/Header';
 import { Categories } from '../components/home/Categories';
 import { FavoritePlaces } from '../components/home/FavoritePlaces';
+import { Explore } from '../components/home/Explore';
 
 export const HomeScreen = () => {
   return (
@@ -16,6 +17,7 @@ export const HomeScreen = () => {
       >
         <Categories />
         <FavoritePlaces />
+        <Explore />
       </ScrollView>
     </View>
   )
@@ -32,7 +34,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     marginTop: -30,
-    
+
   },
   scrollContent: {
     paddingTop: 20,

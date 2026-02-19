@@ -23,4 +23,17 @@ export const stores = [
     }
 ]
 
+export const exploreStore = [
+    {
+        id: 1,
+        name: "Primos - Chiken Lovers Bar",
+        address: "Av. Conquistadores 201, San Isidro",
+        phone: "(01) 12345678",
+        rating: 4.8,
+        thumbnail: require('../assets/stores/primos.png'),
+        buyUntil: "10:30 pm",
+        pickupTime: "11:00 pm"
+    }
+]
+
 export const favsStores = []
