@@ -18,19 +18,24 @@ export const MainTabs = () => (
             name="Home"
             component={HomeScreen}
             options={{
-                tabBarIcon: ({ color }) => <IonIcon name="home-outline" color={color} />
+                title: 'Inicio',
+                tabBarIcon: ({ color }) => <IonIcon name="home" color={color} />,
+                tabBarActiveTintColor: colors.primary,
             }}
         />
         <Tab.Screen
             name="Stores"
             component={StoresScreen}
             options={{
-                tabBarIcon: ({ color }) => <IonIcon name="storefront-outline" color={color} />,
+                title: 'Tiendas',
+                tabBarIcon: ({ color }) => <IonIcon name="storefront" color={color} />,
                 headerShown: true,
                 headerTitle: 'Tiendas cercanas',
                 headerStyle: { backgroundColor: colors.primary },
                 headerTitleStyle: { color: colors.white, fontWeight: '700' },
                 headerTintColor: colors.white,
+                tabBarActiveTintColor: colors.primary,
+
             }}
         />
     </Tab.Navigator>
