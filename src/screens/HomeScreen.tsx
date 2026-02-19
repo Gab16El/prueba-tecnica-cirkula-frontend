@@ -3,6 +3,7 @@ import { View, ScrollView, StyleSheet } from 'react-native'
 import { colors } from '../theme/colors';
 import { Header } from '../components/home/Header';
 import { Categories } from '../components/home/Categories';
+import { FavoritePlaces } from '../components/home/FavoritePlaces';
 
 export const HomeScreen = () => {
   return (
@@ -14,6 +15,7 @@ export const HomeScreen = () => {
         contentContainerStyle={styles.scrollContent}
       >
         <Categories />
+        <FavoritePlaces />
       </ScrollView>
     </View>
   )
@@ -30,6 +32,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     marginTop: -30,
+    
   },
   scrollContent: {
     paddingTop: 20,

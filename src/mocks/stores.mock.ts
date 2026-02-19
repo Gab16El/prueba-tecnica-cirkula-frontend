@@ -22,3 +22,5 @@ export const stores = [
         "isOpen": true
     }
 ]
+
+export const favsStores = []

@@ -27,7 +27,7 @@ export const Section = ({ title, linkText = 'Ver todos', onLinkPress, children }
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 24,
+        marginBottom: 36,
     },
     header: {
         flexDirection: 'row',
