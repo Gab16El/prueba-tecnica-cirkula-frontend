@@ -1,16 +1,37 @@
-import React from 'react'
-import { FlatList, StyleSheet } from 'react-native'
+import React, { useState } from 'react'
+import { FlatList, StyleSheet, RefreshControl } from 'react-native'
 import { colors } from '../theme/colors'
 import { StoreCard } from '../components/store/StoreCard'
 import { useStoresQuery } from '../hooks/stores/useStoreQuery'
 import { useLocationStore } from '../hooks/location/useLocationStore'
+import { StoreCardSkeleton } from '../components/store/StoreCardSkeleton'
 
 export const StoresScreen = () => {
     const { currentLocation } = useLocationStore();
+    const [refreshing, setRefreshing] = useState(false);
     const { 
         data: storesData, 
-        isLoading: isLoadingStores 
+        isLoading: isLoadingStores,
+        refetch
     } = useStoresQuery(currentLocation);
+
+    const handleRefresh =  async() => {
+        setRefreshing(true);
+        await refetch();
+        setRefreshing(false);
+    }
+
+    if (isLoadingStores) {
+        return (
+            <FlatList
+                data={[1, 2, 3]}
+                keyExtractor={(item) => item.toString()}
+                contentContainerStyle={styles.list}
+                renderItem={() => <StoreCardSkeleton />}
+            />
+        );
+    }
+
 
     return (
         <FlatList
@@ -18,6 +39,14 @@ export const StoresScreen = () => {
             keyExtractor={(item) => item.id.toString()}
             contentContainerStyle={styles.list}
             showsVerticalScrollIndicator={false}
+            refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={handleRefresh}
+                    colors={[colors.primary]}
+                    tintColor={colors.primary}
+                />
+            }
             renderItem={({ item }) => (
                 <StoreCard item={item} />
             )}
@@ -29,45 +58,5 @@ const styles = StyleSheet.create({
     list: {
         padding: 16,
         gap: 12,
-    },
-    card: {
-        backgroundColor: colors.white,
-        borderRadius: 16,
-        overflow: 'hidden',
-        elevation: 2,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.08,
-        shadowRadius: 6,
-    },
-    nameKm: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    image: {
-        width: '100%',
-        height: 160,
-        resizeMode: 'cover',
-    },
-    info: {
-        padding: 12,
-        gap: 4,
-    },
-    name: {
-        fontSize: 18,
-        fontWeight: '600',
-        color: colors.black,
-        marginBottom: 4,
-    },
-    metaRow: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        gap: 4,
-    },
-    meta: {
-        fontSize: 18,
-        color: colors.gray,
     },
 })
