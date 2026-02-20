@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, ScrollView, StyleSheet } from 'react-native'
 import { colors } from '../theme/colors';
 import { Header } from '../components/home/Header';
 import { Categories } from '../components/home/Categories';
 import { FavoritePlaces } from '../components/home/FavoritePlaces';
 import { Explore } from '../components/home/Explore';
+import { useLocationStore } from '../hooks/location/useLocationStore';
 
 export const HomeScreen = () => {
+
+  const { currentLocation, getCurrentLocation } = useLocationStore();
+
+  useEffect(() => {
+    getCurrentLocation();
+  }, []);
+
   return (
     <View style={styles.container}>
       <Header />
