@@ -3,11 +3,27 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { IonIcon } from '../shared/IonIcon'
 import { colors } from '../../theme/colors'
 import { StoresList } from '../../types/cirkula.types'
+import { useFavorites } from '../../hooks/stores/useFavorites'
 
 export const StoreCard = ({ item }: { item: StoresList }) => {
+    const { toggleFavorite, isFavorite } = useFavorites();
+    const favorite = isFavorite(item.id);
+
     return (
         <TouchableOpacity style={styles.card} activeOpacity={0.9}>
             <Image source={{ uri: item.bannerUrl }} style={styles.image} />
+
+            <TouchableOpacity
+                style={styles.heartButton}
+                onPress={() => toggleFavorite(item.id)}
+            >
+                <IonIcon
+                    name={favorite ? 'heart' : 'heart-outline'}
+                    size={22}
+                    color={favorite ? '#EF4444' : colors.white}
+                />
+            </TouchableOpacity>
+
             <View style={styles.info}>
                 <View style={styles.nameKm}>
                     <Text style={styles.name}>{item.name}</Text>
@@ -36,6 +52,16 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.08,
         shadowRadius: 6,
     },
+    heartButton: {
+        position: 'absolute',
+        top: 10,
+        right: 10,
+        backgroundColor: 'rgba(0,0,0,0.3)',
+        borderRadius: 20,
+        padding: 6,
+        zIndex: 1,
+    },
+
     nameKm: {
         flex: 1,
         flexDirection: 'row',
