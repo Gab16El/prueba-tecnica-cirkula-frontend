@@ -49,4 +49,4 @@ export const exploreStore = [
     }
 ]
 
-export const favsStores = []
+// export const favsStores = []
