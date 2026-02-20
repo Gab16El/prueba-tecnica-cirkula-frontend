@@ -19,5 +19,6 @@ export const useStoresQuery = (coords: Coords | null) => {
         queryKey: ['stores', coords?.latitude, coords?.longitude],
         queryFn: () => getStores(coords!),
         select: (data) => data.stores,
+        enabled: !!coords,
     });
 };
