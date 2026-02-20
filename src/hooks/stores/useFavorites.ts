@@ -1,28 +1,36 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import type { StoresList } from '../../types/cirkula.types';
+import { useDispatch, useSelector } from 'react-redux';
+import { Rootstate } from '../../store/store';
+import { toggleFavorite, setFavorites } from '../../store/favorites/favoritesSlice';
 
 export const useFavorites = () => {
-    const [favorites, setFavorites] = useState<number[]>([]);
+    const dispatch = useDispatch();
+    const favorites = useSelector((state: Rootstate) => state.favorites.ids);
 
     useEffect(() => {
         AsyncStorage.getItem('favorites').then((data: string | null) => {
-            if (data) setFavorites(JSON.parse(data));
+            if (data) dispatch(setFavorites(JSON.parse(data) as number[]));
         });
     }, []);
 
-    const toggleFavorite = async (id: number) => {
+    const handleToggle = async (id: number) => {
+        dispatch(toggleFavorite(id));
         const updated = favorites.includes(id)
             ? favorites.filter(f => f !== id)
             : [...favorites, id];
-        setFavorites(updated);
         await AsyncStorage.setItem('favorites', JSON.stringify(updated));
     };
 
     const isFavorite = (id: number) => favorites.includes(id);
 
-    const filterFavorites = (stores: StoresList[]) => 
+    const filterFavorites = (stores: StoresList[]) =>
         stores.filter(store => favorites.includes(store.id));
 
-    return { favorites, toggleFavorite, isFavorite, filterFavorites };
-};
+    return {
+        favorites, 
+        toggleFavorite: handleToggle,
+        isFavorite, filterFavorites
+    }
+}
