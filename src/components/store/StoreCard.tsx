@@ -32,9 +32,16 @@ export const StoreCard = ({ item }: { item: StoresList }) => {
                         <Text style={styles.meta}>{item.distanceInKm} km</Text>
                     </View>
                 </View>
-                <View style={styles.metaRow}>
-                    <IonIcon name="time-outline" size={13} color={colors.gray} />
-                    <Text style={styles.meta}>{item.openTime + ' / ' + item.closeTime}</Text>
+                <View style={styles.bottomRow}>
+                    <View style={[styles.badge, item.isOpen ? styles.badgeOpen : styles.badgeClosed]}>
+                        <Text style={[styles.badgeText, item.isOpen ? styles.badgeTextOpen : styles.badgeTextClosed]}>
+                            {item.isOpen ? 'Abierto' : 'Cerrado'}
+                        </Text>
+                    </View>
+                    <View style={styles.metaRow}>
+                        <IonIcon name="time-outline" size={13} color={colors.gray} />
+                        <Text style={styles.meta}>{item.openTime + ' / ' + item.closeTime}</Text>
+                    </View>
                 </View>
             </View>
         </TouchableOpacity>
@@ -91,5 +98,32 @@ const styles = StyleSheet.create({
     meta: {
         fontSize: 18,
         color: colors.gray,
+    },
+
+    bottomRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    badge: {
+        paddingHorizontal: 8,
+        paddingVertical: 3,
+        borderRadius: 20,
+    },
+    badgeOpen: {
+        backgroundColor: '#DCFCE7',
+    },
+    badgeClosed: {
+        backgroundColor: '#FEE2E2',
+    },
+    badgeText: {
+        fontSize: 11,
+        fontWeight: '600',
+    },
+    badgeTextOpen: {
+        color: '#16A34A',
+    },
+    badgeTextClosed: {
+        color: '#DC2626',
     },
 })

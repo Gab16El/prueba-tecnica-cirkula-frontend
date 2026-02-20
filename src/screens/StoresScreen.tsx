@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FlatList, StyleSheet, RefreshControl, View } from 'react-native'
+import { FlatList, StyleSheet, RefreshControl, View, ScrollView } from 'react-native'
 import { colors } from '../theme/colors'
 import { StoreCard } from '../components/store/StoreCard'
 import { useStoresQuery } from '../hooks/stores/useStoreQuery'
@@ -36,9 +36,19 @@ export const StoresScreen = () => {
 
     if (isError) {
         return (
-            <View style={styles.errorContainer}>
+            <ScrollView
+                contentContainerStyle={styles.errorContainer}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={handleRefresh}
+                        colors={[colors.primary]}
+                        tintColor={colors.primary}
+                    />
+                }
+            >
                 <Empty icon="wifi-outline" message="No se pudo cargar las tiendas. Verifica tu conexión." />
-            </View>
+            </ScrollView>
         );
     }
 
