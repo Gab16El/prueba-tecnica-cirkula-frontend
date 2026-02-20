@@ -14,10 +14,10 @@ interface Coords {
     longitude: number
 }
 
-export const useStoresQuery = (coords: Coords) => {
+export const useStoresQuery = (coords: Coords | null) => {
     return useQuery({
-        queryKey: ['stores', coords.latitude, coords.longitude],
-        queryFn: () => getStores(coords),
+        queryKey: ['stores', coords?.latitude, coords?.longitude],
+        queryFn: () => getStores(coords!),
         select: (data) => data.stores,
     });
 };

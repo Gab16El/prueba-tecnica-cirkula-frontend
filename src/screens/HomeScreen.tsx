@@ -8,8 +8,7 @@ import { Explore } from '../components/home/Explore';
 import { useLocationStore } from '../hooks/location/useLocationStore';
 
 export const HomeScreen = () => {
-
-  const { currentLocation, getCurrentLocation } = useLocationStore();
+  const { getCurrentLocation } = useLocationStore();
 
   useEffect(() => {
     getCurrentLocation();

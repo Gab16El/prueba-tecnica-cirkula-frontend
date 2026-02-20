@@ -2,12 +2,12 @@ import React from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { IonIcon } from '../shared/IonIcon'
 import { colors } from '../../theme/colors'
-import { StoresInterface } from '../../mocks/stores.mock'
+import { StoresList } from '../../types/cirkula.types'
 
-export const StoreCard = ({ item }: { item: StoresInterface }) => {
+export const StoreCard = ({ item }: { item: StoresList }) => {
     return (
         <TouchableOpacity style={styles.card} activeOpacity={0.9}>
-            <Image source={item.bannerUrl} style={styles.image} />
+            <Image source={{ uri: item.bannerUrl }} style={styles.image} />
             <View style={styles.info}>
                 <View style={styles.nameKm}>
                     <Text style={styles.name}>{item.name}</Text>

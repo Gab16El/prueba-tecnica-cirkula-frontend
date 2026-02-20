@@ -1,13 +1,20 @@
 import React from 'react'
 import { FlatList, StyleSheet } from 'react-native'
 import { colors } from '../theme/colors'
-import { stores } from '../mocks/stores.mock'
 import { StoreCard } from '../components/store/StoreCard'
+import { useStoresQuery } from '../hooks/stores/useStoreQuery'
+import { useLocationStore } from '../hooks/location/useLocationStore'
 
 export const StoresScreen = () => {
+    const { currentLocation } = useLocationStore();
+    const { 
+        data: storesData, 
+        isLoading: isLoadingStores 
+    } = useStoresQuery(currentLocation);
+
     return (
         <FlatList
-            data={stores}
+            data={storesData}
             keyExtractor={(item) => item.id.toString()}
             contentContainerStyle={styles.list}
             showsVerticalScrollIndicator={false}
